@@ -212,6 +212,7 @@ class TextGenerationService(generation_pb2_grpc.GenerationServiceServicer):
         self,
         request: BatchedGenerationRequest,
         context: ServicerContext,
+        priority: int,
     ) -> BatchedGenerationResponse:
         start_time = time.time()
         service_metrics.count_generate_request(len(request.requests))
@@ -249,6 +250,7 @@ class TextGenerationService(generation_pb2_grpc.GenerationServiceServicer):
                     inputs=inputs,
                     sampling_params=sampling_params,
                     request_id=f"{request_id}-{i}",
+                    priority=priority,
                     **adapter_kwargs,
                     **kwargs,
                 ),
