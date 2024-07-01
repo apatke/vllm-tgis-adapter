@@ -51,6 +51,7 @@ message BatchedGenerationResponse {
 
 message GenerationRequest {
   string text = 2;
+  uint32 priority = 3;
 }
 
 message GenerationResponse {
